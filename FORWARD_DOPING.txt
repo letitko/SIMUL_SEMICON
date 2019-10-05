@@ -1,0 +1,54 @@
+go atlas simflags="-P 1"
+
+mesh
+
+x.mesh loc=0.00 spac=0.05
+x.mesh loc=0.10 spac=0.05
+
+y.mesh loc=0.00 spac=0.20
+y.mesh loc=1.00 spac=0.01
+y.mesh loc=2.00 spac=0.20
+
+region number=1 x.min=0.0 x.max=0.1 y.min=0.0 y.max=1.0 material=silicon
+region number=2 x.min=0.0 x.max=0.1 y.min=1.0 y.max=2.0 material=silicon
+
+electrode name=cathode top
+electrode name=anode bottom
+
+doping uniform conc=1e28 n.type region=1
+doping uniform conc=1e18 p.type region=2
+
+
+models bipolar kla analytic
+
+output con.band val.band
+
+solve init
+
+save outfile=init.str
+
+log outfile=forward.log
+
+solve vanode=0.0 vstep=0.02 vfinal=0.2 name=anode
+
+save outfile=prob0_2.str
+
+solve vanode=0.22 vstep=0.02 vfinal=0.4 name=anode
+
+save outfile=prob0_4.str
+
+solve vanode=0.42 vstep=0.02 vfinal=0.6 name=anode
+
+save outfile=prob0_6.str
+
+solve vanode=0.62 vstep=0.02 vfinal=0.8 name=anode
+
+save outfile=prob0_8.str
+
+solve vanode=0.82 vstep=0.02 vfinal=1.0 name=anode
+
+save outfile=prob1_0.str
+
+log off
+
+quit 

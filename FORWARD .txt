@@ -1,0 +1,41 @@
+go atlas simflags="-P 1"
+
+mesh 
+
+
+
+
+
+models bipolar kla analytic
+
+output con.band val.band
+
+solve init
+
+save outfile=init.str
+
+log outfile=forward.log
+
+solve vanode=0.0 vstep=0.02 vfinal=0.2 name=anode
+
+save outfile=prob0_2.str
+
+solve vanode=0.22 vstep=0.02 vfinal=0.4 name=anode
+
+save outfile=prob0_4.str
+
+solve vanode=0.42 vstep=0.02 vfinal=0.6 name=anode
+
+save outfile=prob0_6.str
+
+solve vanode=0.62 vstep=0.02 vfinal=0.8 name=anode
+
+save outfile=prob0_8.str
+
+solve vanode=0.82 vstep=0.02 vfinal=1.0 name=anode
+
+save outfile=prob1_0.str
+
+log off
+
+quit
