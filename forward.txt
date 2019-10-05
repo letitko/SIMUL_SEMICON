@@ -2,10 +2,6 @@ go atlas simflags="-P 1"
 
 mesh 
 
-
-
-
-
 models bipolar kla analytic
 
 output con.band val.band
